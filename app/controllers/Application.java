@@ -1,22 +1,23 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
+import models.VerboseAction;
 
-import views.html.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import services.*;
-
-import org.springframework.beans.factory.annotation.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import play.mvc.With;
+import services.HelloService;
 
 @org.springframework.stereotype.Controller
 public class Application extends Controller {
 
 	@Autowired
 	private HelloService helloService;
-  
+ 
+	@With(VerboseAction.class)
   	public Result index() {
-    	return ok(index.render(helloService.hello()));
+    	return ok(views.html.index.render(helloService.hello()));
   	}
   
 }
